@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reusable Responsive Navbar</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+    }
+
+    /* Navbar Container */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #2c3e50;
+      color: #fff;
+      padding: 0.8rem 2rem;
+    }
+
+    .navbar .brand {
+      font-size: 1.5rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Navbar Links */
+    .navbar .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar .nav-links a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      color: #1abc9c;
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown .dropdown-toggle {
+      cursor: pointer;
+    }
+
+    .dropdown .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #34495e;
+      color: #fff;
+      min-width: 200px;
+      display: none;
+      flex-direction: column;
+      padding: 0.5rem 0;
+      border-radius: 5px;
+      z-index: 1000;
+    }
+
+    .dropdown .dropdown-menu a {
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown .dropdown-menu a:hover {
+      background-color: #1abc9c;
+    }
+
+    /* Hamburger Menu for Mobile */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+    }
+
+    /* Mobile View */
+    @media (max-width: 768px) {
+      .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: #2c3e50;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        padding: 1rem 0;
+        z-index: 1000;
+      }
+
+      .navbar .nav-links.active {
+        display: flex;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">MyBrand</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <div class="dropdown">
+        <span class="dropdown-toggle">Services</span>
+        <div class="dropdown-menu">
+          <a href="#">Web Development</a>
+          <a href="#">UI/UX Design</a>
+          <a href="#">SEO Optimization</a>
+        </div>
+      </div>
+      <a href="#">Contact</a>
+    </div>
+    <div class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <script>
+    // Toggle Mobile Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    // Dropdown Menu Functionality
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    dropdownToggle.addEventListener('click', () => {
+      dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    // Close Dropdown Menu on Outside Click
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.dropdown')) {
+        dropdownMenu.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

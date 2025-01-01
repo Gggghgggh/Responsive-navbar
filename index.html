@@ -37,6 +37,7 @@
     .navbar .nav-links {
       display: flex;
       gap: 1.5rem;
+      transition: transform 0.3s ease-in-out;
     }
 
     .navbar .nav-links a {
@@ -158,7 +159,8 @@
     const dropdownToggle = document.querySelector('.dropdown-toggle');
     const dropdownMenu = document.querySelector('.dropdown-menu');
 
-    dropdownToggle.addEventListener('click', () => {
+    dropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent closing the menu when clicking inside
       dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
     });
 

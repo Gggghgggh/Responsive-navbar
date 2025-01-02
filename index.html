@@ -37,7 +37,7 @@
     .navbar .nav-links {
       display: flex;
       gap: 1.5rem;
-      transition: transform 0.3s ease-in-out;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
     }
 
     .navbar .nav-links a {
@@ -111,10 +111,14 @@
         width: 100%;
         padding: 1rem 0;
         z-index: 1000;
+        opacity: 0;
+        transform: translateY(-20px);
       }
 
       .navbar .nav-links.active {
         display: flex;
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .hamburger {

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Navbar with Dropdown</title>
+  <title>Responsive Navbar with Clickable Dropdown</title>
   <style>
     /* General Reset */
     * {
@@ -54,7 +54,6 @@
       transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
     }
 
-    /* Hamburger Transitions */
     .hamburger.active div:nth-child(1) {
       transform: rotate(45deg) translateY(8px);
     }
@@ -104,6 +103,10 @@
       border-radius: 5px;
     }
 
+    .dropdown-menu.active {
+      display: flex;
+    }
+
     .dropdown-menu a {
       text-decoration: none;
       color: #fff;
@@ -113,10 +116,6 @@
 
     .dropdown-menu a:hover {
       background-color: #1abc9c;
-    }
-
-    .dropdown:hover .dropdown-menu {
-      display: flex;
     }
 
     /* Side Menu (Mobile Mode) */
@@ -152,7 +151,7 @@
       background-color: #1abc9c;
     }
 
-    /* Mobile Responsive Adjustments */
+    /* Responsive Adjustments */
     @media (max-width: 768px) {
       .hamburger {
         display: flex;
@@ -166,7 +165,7 @@
         display: none;
       }
 
-      .side-menu .dropdown.active .dropdown-menu {
+      .side-menu .dropdown-menu.active {
         display: flex;
         flex-direction: column;
       }
@@ -213,8 +212,7 @@
   <script>
     const hamburger = document.querySelector('.hamburger');
     const sideMenu = document.querySelector('.side-menu');
-    const sideDropdownToggle = document.querySelector('.side-menu .dropdown-toggle');
-    const sideDropdownMenu = document.querySelector('.side-menu .dropdown-menu');
+    const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
 
     // Toggle Side Menu
     hamburger.addEventListener('click', () => {
@@ -222,10 +220,13 @@
       sideMenu.classList.toggle('active');
     });
 
-    // Toggle Dropdown in Side Menu
-    sideDropdownToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      sideDropdownMenu.classList.toggle('active');
+    // Toggle Dropdown Menus
+    dropdownToggles.forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dropdownMenu = toggle.nextElementSibling;
+        dropdownMenu.classList.toggle('active');
+      });
     });
   </script>
 </body>

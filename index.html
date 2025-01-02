@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Side Menu</title>
+  <title>Responsive Navbar with Dropdown</title>
   <style>
     /* General Reset */
     * {
@@ -67,7 +67,59 @@
       transform: rotate(-45deg) translateY(-8px);
     }
 
-    /* Side Menu */
+    /* Navigation Links (Desktop Mode) */
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a,
+    .nav-links .dropdown-toggle {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .dropdown-toggle:hover {
+      color: #1abc9c;
+    }
+
+    /* Dropdown */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #34495e;
+      display: none;
+      flex-direction: column;
+      padding: 0.5rem 0;
+      border-radius: 5px;
+    }
+
+    .dropdown-menu a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: #1abc9c;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: flex;
+    }
+
+    /* Side Menu (Mobile Mode) */
     .side-menu {
       position: fixed;
       top: 0;
@@ -86,7 +138,8 @@
       left: 0;
     }
 
-    .side-menu a {
+    .side-menu a,
+    .side-menu .dropdown-toggle {
       text-decoration: none;
       color: #fff;
       font-size: 1.2rem;
@@ -94,41 +147,28 @@
       transition: background-color 0.3s ease;
     }
 
-    .side-menu a:hover {
+    .side-menu a:hover,
+    .side-menu .dropdown-toggle:hover {
       background-color: #1abc9c;
     }
 
-    /* Desktop View */
-    @media (min-width: 768px) {
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 768px) {
       .hamburger {
+        display: flex;
+      }
+
+      .nav-links {
         display: none;
       }
 
-      .side-menu {
+      .side-menu .dropdown-menu {
         display: none;
       }
 
-      .navbar .nav-links {
+      .side-menu .dropdown.active .dropdown-menu {
         display: flex;
-        gap: 1.5rem;
-      }
-
-      .navbar .nav-links a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 1rem;
-        transition: color 0.3s;
-      }
-
-      .navbar .nav-links a:hover {
-        color: #1abc9c;
-      }
-    }
-
-    /* Mobile View */
-    @media (max-width: 767px) {
-      .hamburger {
-        display: flex;
+        flex-direction: column;
       }
     }
   </style>
@@ -136,6 +176,19 @@
 <body>
   <nav class="navbar">
     <div class="brand">MyBrand</div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <div class="dropdown">
+        <span class="dropdown-toggle">Services</span>
+        <div class="dropdown-menu">
+          <a href="#">Web Development</a>
+          <a href="#">UI/UX Design</a>
+          <a href="#">SEO Optimization</a>
+        </div>
+      </div>
+      <a href="#">Contact</a>
+    </div>
     <div class="hamburger">
       <div></div>
       <div></div>
@@ -146,18 +199,33 @@
   <div class="side-menu">
     <a href="#">Home</a>
     <a href="#">About</a>
-    <a href="#">Services</a>
+    <div class="dropdown">
+      <span class="dropdown-toggle">Services</span>
+      <div class="dropdown-menu">
+        <a href="#">Web Development</a>
+        <a href="#">UI/UX Design</a>
+        <a href="#">SEO Optimization</a>
+      </div>
+    </div>
     <a href="#">Contact</a>
   </div>
 
   <script>
     const hamburger = document.querySelector('.hamburger');
     const sideMenu = document.querySelector('.side-menu');
+    const sideDropdownToggle = document.querySelector('.side-menu .dropdown-toggle');
+    const sideDropdownMenu = document.querySelector('.side-menu .dropdown-menu');
 
     // Toggle Side Menu
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('active');
       sideMenu.classList.toggle('active');
+    });
+
+    // Toggle Dropdown in Side Menu
+    sideDropdownToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      sideDropdownMenu.classList.toggle('active');
     });
   </script>
 </body>

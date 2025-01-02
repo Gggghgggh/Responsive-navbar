@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Navbar with Clickable Dropdown</title>
+  <title>Responsive Side Menu with Independent Dropdown</title>
   <style>
     /* General Reset */
     * {
@@ -51,7 +51,7 @@
       width: 25px;
       height: 3px;
       background-color: #fff;
-      transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     .hamburger.active div:nth-child(1) {
@@ -64,58 +64,6 @@
 
     .hamburger.active div:nth-child(3) {
       transform: rotate(-45deg) translateY(-8px);
-    }
-
-    /* Navigation Links (Desktop Mode) */
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-    }
-
-    .nav-links a,
-    .nav-links .dropdown-toggle {
-      text-decoration: none;
-      color: #fff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover,
-    .nav-links .dropdown-toggle:hover {
-      color: #1abc9c;
-    }
-
-    /* Dropdown */
-    .dropdown {
-      position: relative;
-    }
-
-    .dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: #34495e;
-      display: none;
-      flex-direction: column;
-      padding: 0.5rem 0;
-      border-radius: 5px;
-    }
-
-    .dropdown-menu.active {
-      display: flex;
-    }
-
-    .dropdown-menu a {
-      text-decoration: none;
-      color: #fff;
-      padding: 0.5rem 1rem;
-      transition: background-color 0.3s;
-    }
-
-    .dropdown-menu a:hover {
-      background-color: #1abc9c;
     }
 
     /* Side Menu (Mobile Mode) */
@@ -144,10 +92,42 @@
       font-size: 1.2rem;
       padding: 1rem;
       transition: background-color 0.3s ease;
+      position: relative;
     }
 
     .side-menu a:hover,
     .side-menu .dropdown-toggle:hover {
+      background-color: #1abc9c;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 100%; /* Align to the right of "Services" */
+      background-color: #2c3e50;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 100;
+    }
+
+    .dropdown .dropdown-menu.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dropdown .dropdown-menu a {
+      text-decoration: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown .dropdown-menu a:hover {
       background-color: #1abc9c;
     }
 
@@ -156,38 +136,12 @@
       .hamburger {
         display: flex;
       }
-
-      .nav-links {
-        display: none;
-      }
-
-      .side-menu .dropdown-menu {
-        display: none;
-      }
-
-      .side-menu .dropdown-menu.active {
-        display: flex;
-        flex-direction: column;
-      }
     }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <div class="brand">MyBrand</div>
-    <div class="nav-links">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <div class="dropdown">
-        <span class="dropdown-toggle">Services</span>
-        <div class="dropdown-menu">
-          <a href="#">Web Development</a>
-          <a href="#">UI/UX Design</a>
-          <a href="#">SEO Optimization</a>
-        </div>
-      </div>
-      <a href="#">Contact</a>
-    </div>
     <div class="hamburger">
       <div></div>
       <div></div>
